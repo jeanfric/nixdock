@@ -1,10 +1,10 @@
 FROM scratch
 MAINTAINER Jean-Francois Richard <jf.richard@heimdalsgata.com>
-ADD nix-1.7-x86_64-linux/store/8qhilznm4abzjvnbkqi48zy6wrljgi80-bash-4.2-p45/bin/bash /bin/sh
-ADD nix-1.7-x86_64-linux/store /nix/store
-ADD nix-1.7-x86_64-linux/.reginfo /root/reginfo
+ADD tmp/nix-archive/store/*-bash-*/bin/bash /bin/sh
+ADD tmp/nix-archive/store /nix/store
+ADD tmp/nix-archive/.reginfo /root/reginfo
 # Just to create /tmp (we don't have mkdir yet):
-ADD nix-1.7-x86_64-linux/.reginfo /tmp/reginfo
+ADD tmp/nix-archive/.reginfo /tmp/reginfo
 WORKDIR /root
 ENV HOME /root
 ENV USER root
