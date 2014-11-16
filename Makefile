@@ -1,10 +1,11 @@
 VERSION=1.7
+URL=https://nixos.org/releases/nix/nix-$(VERSION)/nix-$(VERSION)-x86_64-linux.tar.bz2
 
 default: nixdock
 
 tmp/nix-archive:
 	mkdir -p tmp/nix-archive
-	wget -O - https://nixos.org/releases/nix/nix-$(VERSION)/nix-$(VERSION)-x86_64-linux.tar.bz2 | tar --strip-components 1 -C tmp/nix-archive -xjf -
+	wget -O - "$(URL)" | tar --strip-components 1 -C tmp/nix-archive -xjf -
 
 nixdock: tmp/nix-archive
 	docker build -t nixdock .
