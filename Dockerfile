@@ -11,7 +11,6 @@ ENV USER root
 RUN \
   /nix/store/*-nix-*/bin/nix-store --init                        &&\
   /nix/store/*-nix-*/bin/nix-store --load-db < /root/reginfo     &&\
-  /nix/store/*-nix-*/bin/nix-store --optimise                    &&\
   . /nix/store/*-nix-*/etc/profile.d/nix.sh                      &&\
   /nix/store/*-nix-*/bin/nix-env -i                                \
     /nix/store/*-nix-*                                             \
@@ -27,6 +26,11 @@ RUN \
   ln -s /root/.nix-profile/bin/env /usr/bin/env                  &&\
   echo "root::0:"       >  /etc/group                            &&\
   echo "nixbld::1:root" >> /etc/group                            &&\
-  echo "root::0:0::/root:/bin/sh" > /etc/passwd
+  echo "root::0:0::/root:/bin/sh" > /etc/passwd                  &&\
+  chmod -R a-w /nix/store                                        &&\
+  mkdir /nix/var/nix/manifests                                   &&\
+  nix-collect-garbage                                            &&\
+  nix-collect-garbage --delete-old                               &&\
+  nix-store --optimise
 ENTRYPOINT ["/bin/nixdo"]
 CMD ["/bin/nixdo", "bash" ]
