@@ -18,7 +18,7 @@ RUN \
     /nix/store/*-coreutils-*                                       \
     /nix/store/*-bash-*                                          &&\
   rm /root/reginfo /tmp/* /bin/*                                 &&\
-  echo '#!/root/.nix-profile/bin/bash'             >> /bin/nixdo &&\
+  echo '#!/root/.nix-profile/bin/bash'             >  /bin/nixdo &&\
   echo '. /root/.nix-profile/etc/profile.d/nix.sh' >> /bin/nixdo &&\
   echo '/root/.nix-profile/bin/bash -c "$*"'       >> /bin/nixdo &&\
   chmod +x /bin/nixdo                                            &&\
