@@ -4,7 +4,7 @@ nixdock
 A bare-bones Docker container with Nix (http://nixos.org/nix) installed and
 nothing more.
 
-To build and start nixdock:
+To build and run nixdock:
 
 ```
 make nixdock
