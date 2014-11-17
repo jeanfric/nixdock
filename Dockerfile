@@ -24,6 +24,9 @@ RUN \
   chmod +x /bin/nixdo                                            &&\
   ln -s /root/.nix-profile/bin/bash /bin/sh                      &&\
   mkdir -p /usr/bin                                              &&\
-  ln -s /root/.nix-profile/bin/env /usr/bin/env
+  ln -s /root/.nix-profile/bin/env /usr/bin/env                  &&\
+  echo "root::0:"       >  /etc/group                            &&\
+  echo "nixbld::1:root" >> /etc/group                            &&\
+  echo "root::0:0::/root:/bin/sh" > /etc/passwd
 ENTRYPOINT ["/bin/nixdo"]
 CMD ["/bin/nixdo", "bash" ]
