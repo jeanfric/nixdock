@@ -26,10 +26,8 @@ RUN \
   echo "nixbld::1:nixbld1" >> /etc/group                         &&\
   echo "root::0:0::/root:/bin/sh"            >  /etc/passwd      &&\
   echo "nixbld1::1:1::/var/empty:/bin/false" >> /etc/passwd      &&\
-  chmod -R a-w /nix/store                                        &&\
   mkdir /nix/var/nix/manifests                                   &&\
   nix-collect-garbage                                            &&\
-  nix-collect-garbage --delete-old                               &&\
-  nix-store --optimise
+  nix-collect-garbage --delete-old
 ENTRYPOINT ["/bin/nixdo"]
 CMD ["/bin/nixdo", "bash" ]
