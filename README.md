@@ -24,6 +24,11 @@ updating the default channel:
 ```
 nix-channel --list
 nix-channel --update
-nix-env --install less vim
+
+# To use bash-interactive, with readline support (tab, arrow keys working)
+nix-env --install bash bash-interactive
+exec bash
+
+nix-env --install less
 nix-env --query --available | less
 ```
