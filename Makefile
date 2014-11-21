@@ -11,7 +11,10 @@ tmp:
 
 tmp/nix.tar.bz2: tmp
 	wget -O tmp/nix.tar.bz2 "$(URL)"
-	cat tmp/nix.tar.bz2 | sha512sum - | if ! grep --quiet --regexp "^$(SHA512SUM) " -; then echo 'hash mismatch' >&2; exit 1; fi
+	cat tmp/nix.tar.bz2 | sha512sum - |                   \
+	  if ! grep --quiet --regexp "^$(SHA512SUM) " -; then \
+	    echo 'hash mismatch' >&2; exit 1;                 \
+	  fi
 
 tmp/nix-archive: tmp/nix.tar.bz2
 	mkdir -p "$@"
